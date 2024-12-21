@@ -1,101 +1,145 @@
-import Image from "next/image";
+'use client';
+
+import { useEffect, useState, useMemo } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { Button, Card, Chip } from '@nextui-org/react';
+import { PlusCircle, ListTodo } from 'lucide-react';
+import { TaskList } from '@/components/tasks/TaskList';
+import { useTasks } from '@/hooks/useTasks';
+import Link from 'next/link';
+import { TaskStats } from '@/components/tasks/TaskStats';
+import { motion } from 'framer-motion';
+import { SearchBar } from '@/components/ui/SearchBar';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [searchQuery, setSearchQuery] = useState('');
+  const { tasks, loading, error, updateTask, deleteTask } = useTasks();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  useEffect(() => {
+    if (!localStorage.getItem('deviceId')) {
+      localStorage.setItem('deviceId', uuidv4());
+    }
+  }, []);
+
+  // Filter tasks based on search query and active filter
+  const filteredTasks = useMemo(() => {
+    let filtered = tasks;
+
+    // Apply search filter
+    if (searchQuery.trim()) {
+      filtered = filtered.filter((task) =>
+        task.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+
+    return filtered;
+  }, [tasks, searchQuery]);
+
+  // Calculate stats based on filtered tasks
+  const completedTasks = tasks.filter((task) => task.completed).length;
+  const totalTasks = tasks.length;
+  const pendingTasks = totalTasks - completedTasks;
+
+  // Calculate filtered stats for display
+  const filteredCompletedTasks = filteredTasks.filter(
+    (task) => task.completed
+  ).length;
+  const filteredTotalTasks = filteredTasks.length;
+
+  return (
+    <div className='max-w-[1200px] mx-auto space-y-8'>
+      {/* Header Section */}
+      <div className='flex flex-col gap-6'>
+        <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4'>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className='space-y-1'
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <h1 className='text-4xl font-bold tracking-tight bg-gradient-to-r from-primary to-primary-600 bg-clip-text text-transparent'>
+              Welcome Back 👋
+            </h1>
+            <p className='text-default-500 text-lg'>
+              {totalTasks === 0
+                ? 'Start organizing your tasks today'
+                : `You have ${pendingTasks} pending tasks`}
+            </p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
           >
-            Read our docs
-          </a>
+            <Link href='/tasks/new'>
+              <Button
+                color='primary'
+                endContent={<PlusCircle className='h-5 w-5' />}
+                size='lg'
+                className='font-medium shadow-lg bg-gradient-to-r from-primary to-primary-600'
+                radius='full'
+              >
+                New Task
+              </Button>
+            </Link>
+          </motion.div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+
+        {/* Search Bar */}
+        <SearchBar onSearch={setSearchQuery} />
+      </div>
+
+      {/* Stats Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+      >
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
+          <TaskStats tasks={tasks} loading={loading} />
+        </div>
+      </motion.div>
+
+      {/* Tasks Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        <Card className='px-6 py-8 shadow-medium bg-background/80 backdrop-blur-xl backdrop-saturate-150 border-1 border-default-200/50 dark:border-default-700/50'>
+          <div className='mb-6 flex flex-col sm:flex-row sm:items-center gap-4 justify-between'>
+            <div className='flex items-center gap-3'>
+              <div className='p-2 rounded-xl bg-primary/10 ring-1 ring-primary/20'>
+                <ListTodo className='h-5 w-5 text-primary' />
+              </div>
+              <div>
+                <h2 className='text-xl font-semibold'>All Tasks</h2>
+                <p className='text-small text-default-500'>
+                  Manage and track your tasks
+                </p>
+              </div>
+            </div>
+            {filteredTotalTasks > 0 && (
+              <Chip
+                variant='flat'
+                color='primary'
+                classNames={{
+                  base: 'bg-primary/10',
+                  content: 'text-primary-600 dark:text-primary-400',
+                }}
+              >
+                {filteredCompletedTasks} of {filteredTotalTasks} completed
+              </Chip>
+            )}
+          </div>
+          <TaskList
+            tasks={filteredTasks}
+            loading={loading}
+            error={error}
+            onUpdate={updateTask}
+            onDelete={deleteTask}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        </Card>
+      </motion.div>
     </div>
   );
 }
