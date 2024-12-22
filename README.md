@@ -56,14 +56,55 @@ nooro-frontend/
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### Backend Setup (Required)
 
-- Node.js 20.x or later
-- npm 9.x or later
+Before running the frontend, you need to set up the backend server:
 
-### Installation
+1. Clone the backend repository:
+```bash
+git clone https://github.com/AkhtarZaman7/backend.git
+cd backend
+```
 
-1. Clone the repository:
+2. Install backend dependencies:
+```bash
+npm install
+```
+
+3. Create a `.env` file in the backend directory:
+```env
+NODE_ENV=development
+PORT=5000
+LOG_LEVEL=info
+
+# Database Configuration
+DATABASE_URL="postgresql://postgres:your_password@localhost:5432/nooro_db"
+
+# PostgreSQL Configuration
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=your_password
+POSTGRES_DB=nooro_db
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+```
+
+4. Run database migrations:
+```bash
+npx prisma migrate dev
+```
+
+5. Start the backend server:
+```bash
+npm run dev
+```
+
+The backend API will be available at `http://localhost:5000`
+
+### Frontend Setup
+
+Once the backend is running, you can set up the frontend:
+
+1. Clone the frontend repository:
 ```bash
 git clone https://github.com/AkhtarZaman7/frontend.git
 cd frontend
@@ -79,12 +120,12 @@ npm install
 NEXT_PUBLIC_API_URL=http://localhost:5000
 ```
 
-4. Start the development server with Turbopack:
+4. Start the development server:
 ```bash
 npm run dev
 ```
 
-The application will be available at [http://localhost:3000](http://localhost:3000).
+The application will be available at `http://localhost:3000`
 
 ## 📜 Available Scripts
 
@@ -134,18 +175,6 @@ The application is configured for easy deployment on Vercel:
 2. Import your repository on [Vercel](https://vercel.com)
 3. Add environment variables
 4. Deploy!
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License.
 
 ## 👥 Authors
 
