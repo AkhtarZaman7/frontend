@@ -5,9 +5,18 @@ A modern, responsive task management application built with Next.js 13, featurin
 
 ## 🚀 Demo
 
-Check out the demo
+Check out the demo Website
 
 https://github.com/user-attachments/assets/0d3a8c44-3759-45c0-bde7-a64a50b724ac
+
+
+Check out the demo Mobile Friendly
+
+
+
+https://github.com/user-attachments/assets/6fc3064a-188f-4294-9c55-a9fa584b8a70
+
+
 
 ## ✨ Features
 
