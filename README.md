@@ -1,17 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nooro - Task Management Application
 
-## Getting Started
+A modern, responsive task management application built with Next.js 13, featuring a beautiful UI with NextUI components and smooth animations.
 
-First, run the development server:
+![Nooro Demo](demo-screenshot.png)
+
+## 🚀 Demo
+
+Check out the live demo: [Nooro App](https://nooro-tasks.vercel.app)
+
+## ✨ Features
+
+- 🎨 Modern and responsive UI using NextUI
+- 🌓 Light/Dark mode support
+- 🔄 Real-time updates
+- 📱 Mobile-first design
+- 🎯 Task organization with colors
+- ⚡ Fast and optimized performance
+- 🔍 Search functionality
+- 🔒 Device-based data persistence
+
+## 🛠️ Tech Stack
+
+- [Next.js 13](https://nextjs.org/) - React framework
+- [TypeScript](https://www.typescriptlang.org/) - Static type checking
+- [NextUI](https://nextui.org/) - UI components
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
+- [Framer Motion](https://www.framer.com/motion/) - Animations
+- [Lucide Icons](https://lucide.dev/) - Icons
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 16.8 or later
+- npm or yarn or pnpm
+
+### Installation
+
+1. Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
