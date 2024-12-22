@@ -1,6 +1,6 @@
 # Nooro - Task Management Application
 
-A modern, responsive task management application built with Next.js 13, featuring a beautiful UI with NextUI components and smooth animations.
+A modern, responsive task management application built with Next.js 15, featuring a beautiful UI with NextUI components and smooth animations.
 
 
 ## 🚀 Demo
