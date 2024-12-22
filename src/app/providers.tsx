@@ -1,18 +1,18 @@
 'use client'
 
 import { NextUIProvider } from '@nextui-org/react'
-import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { ThemeProvider as NextThemeProvider } from "next-themes";
 import { LazyMotion, domAnimation, AnimatePresence } from 'framer-motion';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <NextUIProvider>
-      <NextThemesProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        themes={['light', 'dark']}
-      >
+    <NextThemeProvider
+      attribute="class"
+      defaultTheme="light"
+      enableSystem={false}
+      disableTransitionOnChange
+    >
+      <NextUIProvider>
         <LazyMotion features={domAnimation}>
           <AnimatePresence mode="sync" initial={false}>
             <div key="app-content">
@@ -20,7 +20,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
             </div>
           </AnimatePresence>
         </LazyMotion>
-      </NextThemesProvider>
-    </NextUIProvider>
+      </NextUIProvider>
+    </NextThemeProvider>
   )
 } 
