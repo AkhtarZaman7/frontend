@@ -2,7 +2,10 @@
 
 A modern, responsive task management application built with Next.js 13, featuring a beautiful UI with NextUI components and smooth animations.
 
-![Nooro Demo](demo-screenshot.png)
+![Nooro Demo]
+
+https://github.com/user-attachments/assets/0d3a8c44-3759-45c0-bde7-a64a50b724ac
+
 
 ## 🚀 Demo
 
