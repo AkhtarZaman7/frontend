@@ -43,7 +43,7 @@ Check out the live demo: [Nooro App](https://nooro-tasks.vercel.app)
 1. Clone the repository
 
 ```bash
-git clone https://
+https://github.com/AkhtarZaman7/frontend.git
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
