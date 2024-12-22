@@ -25,8 +25,6 @@ https://github.com/user-attachments/assets/6fc3064a-188f-4294-9c55-a9fa584b8a70
 - 🔄 Real-time task updates
 - 📱 Mobile-first responsive design
 - 🎯 Task organization with color coding
-- ⚡ Server-side rendering for optimal performance
-- 🔍 Real-time task search functionality
 - 🔒 Device-based data persistence
 - 🎭 Smooth animations with Framer Motion
 
