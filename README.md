@@ -2,10 +2,7 @@
 
 A modern, responsive task management application built with Next.js 13, featuring a beautiful UI with NextUI components and smooth animations.
 
-![Nooro Demo]
-
-https://github.com/user-attachments/assets/0d3a8c44-3759-45c0-bde7-a64a50b724ac
-
+![Nooro Task Manager](https://github.com/user-attachments/assets/0d3a8c44-3759-45c0-bde7-a64a50b724ac)
 
 ## 🚀 Demo
 
@@ -13,56 +10,185 @@ Check out the live demo: [Nooro App](https://nooro-tasks.vercel.app)
 
 ## ✨ Features
 
-- 🎨 Modern and responsive UI using NextUI
-- 🌓 Light/Dark mode support
-- 🔄 Real-time updates
-- 📱 Mobile-first design
-- 🎯 Task organization with colors
-- ⚡ Fast and optimized performance
-- 🔍 Search functionality
+- 🎨 Modern and responsive UI with NextUI components
+- 🌓 Light/Dark mode with system preference sync
+- 🔄 Real-time task updates
+- 📱 Mobile-first responsive design
+- 🎯 Task organization with color coding
+- ⚡ Server-side rendering for optimal performance
+- 🔍 Real-time task search functionality
 - 🔒 Device-based data persistence
+- 🎭 Smooth animations with Framer Motion
 
 ## 🛠️ Tech Stack
 
-- [Next.js 13](https://nextjs.org/) - React framework
-- [TypeScript](https://www.typescriptlang.org/) - Static type checking
-- [NextUI](https://nextui.org/) - UI components
-- [Tailwind CSS](https://tailwindcss.com/) - Styling
-- [Framer Motion](https://www.framer.com/motion/) - Animations
-- [Lucide Icons](https://lucide.dev/) - Icons
+- **Framework:** [Next.js](https://nextjs.org/) (v15.1.2)
+- **UI Components:** [@nextui-org/react](https://nextui.org/) (v2.6.8)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/) (v3.4.1)
+- **Animations:** [Framer Motion](https://www.framer.com/motion/) (v11.15.0)
+- **Icons:** [Lucide React](https://lucide.dev/) (v0.469.0)
+- **Theme:** [next-themes](https://github.com/pacocoursey/next-themes) (v0.4.4)
+- **Notifications:** [Sonner](https://sonner.emilkowal.ski/) (v1.7.1)
+- **Utilities:** 
+  - [lodash](https://lodash.com/) (v4.17.21)
+  - [uuid](https://github.com/uuidjs/uuid) (v11.0.3)
+  - [clsx](https://github.com/lukeed/clsx) (v1.2.1)
+  - [tailwind-merge](https://github.com/dcastil/tailwind-merge) (v1.14.0)
+
+## 📦 Project Structure
+
+```
+nooro-frontend/
+├── src/
+│   ├── app/                 # Next.js 13 App Router
+│   │   ├── api/            # API Routes
+│   │   ├── tasks/          # Task-related pages
+│   │   └── page.tsx        # Home page
+│   ├── components/
+│   │   ├── tasks/          # Task-related components
+│   │   └── ui/             # Shared UI components
+│   ├── lib/                # Utilities and API client
+│   ├── hooks/              # Custom React hooks
+│   └── types/              # TypeScript types
+└── public/                 # Static assets
+```
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js 16.8 or later
-- npm or yarn or pnpm
+- Node.js 20.x or later
+- npm 9.x or later
 
 ### Installation
 
-1. Clone the repository
-
+1. Clone the repository:
 ```bash
-https://github.com/AkhtarZaman7/frontend.git
+git clone https://github.com/AkhtarZaman7/frontend.git
+cd frontend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Create a `.env.local` file:
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Start the development server with Turbopack:
+```bash
+npm run dev
+```
 
-## Learn More
+The application will be available at [http://localhost:3000](http://localhost:3000).
 
-To learn more about Next.js, take a look at the following resources:
+## 📜 Available Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `npm run dev` - Start development server with Turbopack
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run clean` - Clean build artifacts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔧 Environment Variables
 
-## Deploy on Vercel
+| Variable | Description | Required | Default |
+|----------|-------------|----------|---------|
+| `NEXT_PUBLIC_API_URL` | Backend API URL | Yes | `http://localhost:5000` |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🧪 Development
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### TypeScript
+
+The project uses TypeScript for type safety. Key dependencies:
+- TypeScript v5.x
+- @types/react v19.x
+- @types/node v20.x
+- @types/lodash v4.17.13
+
+### Code Quality
+
+- **ESLint** v9.x with Next.js configuration
+- **Prettier** for code formatting
+- **TypeScript** for static type checking
+
+## 📝 API Routes
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/api/tasks` | Get all tasks |
+| `POST` | `/api/tasks` | Create a new task |
+| `GET` | `/api/tasks/:id` | Get a specific task |
+| `PUT` | `/api/tasks/:id` | Update a task |
+| `DELETE` | `/api/tasks/:id` | Delete a task |
+
+## 🧪 Deployment
+
+The application is configured for easy deployment on Vercel:
+
+1. Push your code to GitHub
+2. Import your repository on [Vercel](https://vercel.com)
+3. Add environment variables
+4. Deploy!
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 👥 Authors
+
+- Akhtar Zaman - [@AkhtarZaman7](https://github.com/AkhtarZaman7)
+
+## 🙏 Acknowledgments
+
+- [NextUI](https://nextui.org/) for the beautiful UI components
+- [Framer Motion](https://www.framer.com/motion/) for the smooth animations
+- [Lucide Icons](https://lucide.dev/) for the icon set
+
+## 📦 Dependencies
+
+### Production Dependencies
+```json
+{
+  "@heroicons/react": "^2.2.0",
+  "@nextui-org/react": "^2.6.8",
+  "clsx": "1.2.1",
+  "framer-motion": "^11.15.0",
+  "lodash": "^4.17.21",
+  "lucide-react": "^0.469.0",
+  "next": "15.1.2",
+  "next-themes": "^0.4.4",
+  "react": "^19.0.0",
+  "react-dom": "^19.0.0",
+  "sonner": "^1.7.1",
+  "tailwind-merge": "1.14.0",
+  "uuid": "^11.0.3"
+}
+```
+
+### Development Dependencies
+```json
+{
+  "@eslint/eslintrc": "^3",
+  "@types/lodash": "^4.17.13",
+  "@types/node": "^20",
+  "@types/react": "^19",
+  "@types/react-dom": "^19",
+  "eslint": "^9",
+  "eslint-config-next": "15.1.2",
+  "postcss": "^8",
+  "tailwindcss": "^3.4.1",
+  "typescript": "^5"
+}
+```
